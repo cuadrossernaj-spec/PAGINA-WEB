@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GolazoBet | Apuestas Deportivas de Fútbol en Vivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-theme">
+  <!-- INTRO OVERLAY: EFECTO "BREAK THE SCREEN" -->
+  <div id="intro-overlay" class="intro-overlay" aria-live="polite">
+    <canvas id="crack-canvas" class="crack-canvas"></canvas>
+
+    <div class="intro-stage">
+      <div class="intro-badge">GOLAZOBET 3D ARENA</div>
+      <div id="ball-3d-wrapper" class="ball-3d-wrapper">
+        <div id="soccer-ball-3d" class="soccer-ball-3d" aria-hidden="true">
+          <div class="ball-pentagon center"></div>
+          <div class="ball-pentagon top"></div>
+          <div class="ball-pentagon right"></div>
+          <div class="ball-pentagon bottom"></div>
+          <div class="ball-pentagon left"></div>
+          <div class="ball-glare"></div>
+        </div>
+      </div>
+
+      <div id="intro-cta-box" class="intro-cta-box">
+        <p class="intro-subtext">Siente la potencia de cada tiro al arco en pantalla completa</p>
+        <button id="btn-enter-action" type="button" class="btn btn-neon btn-lg">
+          Entrar a la Acción
+        </button>
+        <button id="btn-skip-intro" type="button" class="btn-link">
+          Saltar animación
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL DE LA APLICACIÓN -->
+  <div id="app-shell" class="app-shell">
+    <!-- HEADER / NAVBAR -->
+    <header class="navbar glass">
+      <div class="container navbar-inner">
+        <a href="#top" class="brand-logo" aria-label="GolazoBet Inicio">
+          <span class="brand-icon" aria-hidden="true">⚽</span>
+          <span class="brand-wordmark">GOLAZO<span class="accent-neon">BET</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="#partidos-top" class="nav-link">
+            <span class="live-dot" aria-hidden="true"></span> En Vivo
+          </a>
+          <a href="#partidos-top" class="nav-link">Partidos Top</a>
+          <a href="#promociones" class="nav-link">Promociones</a>
+          <a href="#calculadora" class="nav-link">Calculadora</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-ghost" data-open-modal="login">
+            Iniciar Sesión
+          </button>
+          <button type="button" class="btn btn-neon" data-open-modal="register">
+            Registrarse (Bono 100%)
+          </button>
+        </div>
+
+        <button
+          id="mobile-menu-toggle"
+          type="button"
+          class="mobile-menu-toggle"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div id="mobile-drawer" class="mobile-drawer">
+        <a href="#partidos-top" class="mobile-link">En Vivo &amp; Partidos Top</a>
+        <a href="#calculadora" class="mobile-link">Calculadora de Ganancias</a>
+        <a href="#promociones" class="mobile-link">Promociones</a>
+        <div class="mobile-drawer-actions">
+          <button type="button" class="btn btn-ghost btn-block" data-open-modal="login">
+            Iniciar Sesión
+          </button>
+          <button type="button" class="btn btn-neon btn-block" data-open-modal="register">
+            Registrarse (Bono 100%)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <div class="hero-glow hero-glow-left" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-right" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="promo-pill">
+              <span class="pill-tag">OFERTA RELÁMPAGO</span>
+              <span>Bono de Bienvenida Fútbol 2026</span>
+            </div>
+
+            <h1 class="hero-title">
+              ¡Rompe la Racha! <span class="text-gradient">Duplica tu primer depósito</span> hasta $200 USD
+            </h1>
+
+            <p class="hero-subtitle">
+              Cuotas mejoradas al instante, cobro anticipado cuando tu equipo saca 2 goles de ventaja y retiros rápidos en criptomonedas, tarjetas y transferencia bancaria.
+            </p>
+
+            <!-- CUENTA REGRESIVA -->
+            <div class="countdown-card glass" aria-label="Tiempo restante de la oferta">
+              <div class="countdown-header">
+                <span class="countdown-label">La oferta de bienvenida expira en:</span>
+                <button id="replay-intro-btn" type="button" class="mini-action">
+                  Repetir impacto 3D
+                </button>
+              </div>
+              <div id="countdown-timer" class="countdown-grid">
+                <div class="time-box">
+                  <span id="cd-hours" class="time-value">02</span>
+                  <span class="time-unit">Horas</span>
+                </div>
+                <span class="time-colon" aria-hidden="true">:</span>
+                <div class="time-box">
+                  <span id="cd-minutes" class="time-value">45</span>
+                  <span class="time-unit">Min</span>
+                </div>
+                <span class="time-colon" aria-hidden="true">:</span>
+                <div class="time-box">
+                  <span id="cd-seconds" class="time-value">18</span>
+                  <span class="time-unit">Seg</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-cta-group">
+              <button
+                type="button"
+                class="btn btn-neon btn-xl"
+                data-open-modal="register"
+              >
+                APOSTAR AHORA Y RECLAMAR BONO
+              </button>
+              <a href="#partidos-top" class="btn btn-outline-gold">
+                Ver Cuotas de Hoy
+              </a>
+            </div>
+          </div>
+
+          <!-- PANEL DESTACADO LATERAL DEL HERO -->
+          <aside class="hero-showcase glass" aria-label="Partido estrella del día">
+            <div class="showcase-top">
+              <span class="badge-live"><span class="live-dot"></span> SUPER CUOTA</span>
+              <span class="league-name">UEFA Champions League</span>
+            </div>
+            <div class="matchup-banner">
+              <div class="team-block">
+                <span class="team-crest crest-blue">RMA</span>
+                <span class="team-name">Real Madrid</span>
+              </div>
+              <span class="vs-badge">VS</span>
+              <div class="team-block">
+                <span class="team-crest crest-gold">FCB</span>
+                <span class="team-name">Barcelona</span>
+              </div>
+            </div>
+            <div class="showcase-stats">
+              <div class="stat-item">
+                <span class="stat-label">Volumen en vivo</span>
+                <span class="stat-val accent-gold">$148,920 USD</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Mercados activos</span>
+                <span class="stat-val accent-neon">+185</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-electric btn-block"
+              onclick="document.getElementById('partidos-top').scrollIntoView({ behavior: 'smooth' })"
+            >
+              Seleccionar Cuota en el Feed
+            </button>
+          </aside>
+        </div>
+      </section>
+
+      <!-- SECCIÓN PARTIDOS DESTACADOS DEL DÍA + BOLETA DE APUESTA -->
+      <section id="partidos-top" class="section-block">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="section-eyebrow">MERCADO 1 X 2</span>
+              <h2 class="section-title">Partidos Destacados del Día</h2>
+            </div>
+            <div class="filter-pills" role="group" aria-label="Filtrar partidos">
+              <button type="button" class="filter-btn active" data-filter="all">Todos</button>
+              <button type="button" class="filter-btn" data-filter="live">En Vivo</button>
+              <button type="button" class="filter-btn" data-filter="super">SuperOdds</button>
+            </div>
+          </div>
+
+          <div class="betting-layout">
+            <!-- FEED DE TARJETAS DE PARTIDOS -->
+            <div id="matches-grid" class="matches-grid"></div>
+
+            <!-- BOLETA DE APUESTA INTERACTIVA -->
+            <aside id="betslip-panel" class="betslip-card glass" aria-label="Boleta de apuesta">
+              <div class="betslip-header">
+                <h3>Boleta de Apuesta</h3>
+                <span id="betslip-count" class="betslip-badge">0</span>
+              </div>
+
+              <div id="betslip-empty" class="betslip-empty">
+                <p>Haz clic en cualquier cuota <strong>1</strong>, <strong>X</strong> o <strong>2</strong> para armar tu jugada al instante.</p>
+              </div>
+
+              <div id="betslip-content" class="betslip-content hidden">
+                <div id="betslip-selections" class="betslip-selections"></div>
+
+                <div class="stake-control">
+                  <label for="betslip-stake" class="stake-label">Monto a apostar (USD)</label>
+                  <div class="stake-input-wrap">
+                    <span class="currency-prefix">$</span>
+                    <input
+                      id="betslip-stake"
+                      type="number"
+                      min="1"
+                      max="10000"
+                      step="1"
+                      value="25"
+                    />
+                  </div>
+                  <div class="quick-stakes">
+                    <button type="button" class="chip-btn" data-quick-stake="10">$10</button>
+                    <button type="button" class="chip-btn" data-quick-stake="25">$25</button>
+                    <button type="button" class="chip-btn" data-quick-stake="50">$50</button>
+                    <button type="button" class="chip-btn" data-quick-stake="100">$100</button>
+                  </div>
+                </div>
+
+                <div class="betslip-summary">
+                  <div class="summary-row">
+                    <span>Cuota combinada</span>
+                    <strong id="betslip-total-odds" class="accent-gold">1.00</strong>
+                  </div>
+                  <div class="summary-row highlight">
+                    <span>Ganancia potencial</span>
+                    <strong id="betslip-potential-payout" class="accent-neon">$0.00 USD</strong>
+                  </div>
+                </div>
+
+                <button
+                  id="btn-place-bet"
+                  type="button"
+                  class="btn btn-neon btn-block btn-lg"
+                >
+                  Confirmar Apuesta y Reclamar Bono
+                </button>
+                <button
+                  id="btn-clear-betslip"
+                  type="button"
+                  class="btn-clear-selection"
+                >
+                  Limpiar selección
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALCULADORA / SIMULADOR DE GANANCIAS RÁPIDAS -->
+      <section id="calculadora" class="section-block calculator-section">
+        <div class="container">
+          <div class="calc-card glass">
+            <div class="calc-intro">
+              <span class="section-eyebrow">SIMULADOR INSTANTÁNEO</span>
+              <h2 class="section-title">Calculadora de Ganancias Rápidas</h2>
+              <p class="calc-desc">
+                Desliza el monto de tu apuesta y elige un partido para calcular cuánto podrías cobrar hoy mismo.
+              </p>
+
+              <div class="calc-field">
+                <label for="calc-match-select" class="field-label">Selecciona el partido y pronóstico</label>
+                <select id="calc-match-select" class="calc-select"></select>
+              </div>
+
+              <div class="calc-field">
+                <div class="slider-top">
+                  <label for="calc-amount-slider" class="field-label">Monto de apuesta</label>
+                  <span id="calc-amount-display" class="slider-value accent-gold">$50 USD</span>
+                </div>
+                <input
+                  id="calc-amount-slider"
+                  type="range"
+                  min="5"
+                  max="500"
+                  step="5"
+                  value="50"
+                  class="neon-slider"
+                />
+                <div class="slider-ticks">
+                  <span>$5</span>
+                  <span>$125</span>
+                  <span>$250</span>
+                  <span>$500</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-results">
+              <div class="result-box">
+                <span class="result-caption">Cuota aplicada</span>
+                <span id="calc-odds-value" class="result-number accent-electric">2.15</span>
+              </div>
+              <div class="result-box">
+                <span class="result-caption">Bono 100% estimado (hasta $200)</span>
+                <span id="calc-bonus-value" class="result-number accent-gold">+$50.00 USD</span>
+              </div>
+              <div class="result-box total-box">
+                <span class="result-caption">Ganancia potencial total</span>
+                <span id="calc-payout-value" class="result-payout accent-neon">$107.50 USD</span>
+                <span id="calc-profit-note" class="result-subnote">Ganancia neta: +$57.50 USD</span>
+              </div>
+              <button
+                type="button"
+                class="btn btn-neon btn-block btn-lg"
+                data-open-modal="register"
+              >
+                Activar este Pronóstico con Bono 100%
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROMOCIONES + PRUEBA SOCIAL EN VIVO -->
+      <section id="promociones" class="section-block">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <span class="section-eyebrow">VENTAJAS EXCLUSIVAS</span>
+              <h2 class="section-title">Promociones e Incentivos de Registro</h2>
+            </div>
+          </div>
+
+          <div class="promos-grid">
+            <article class="promo-card glass">
+              <div class="promo-icon icon-neon" aria-hidden="true">🎁</div>
+              <h3>Apuestas Gratuitas (Freebets)</h3>
+              <p>
+                Recibe hasta $50 USD en Freebets cada semana al completar tus combinadas en Champions League, Premier League y LaLiga.
+              </p>
+              <span class="promo-tag">Sin rollover oculto en ganancias netas</span>
+            </article>
+
+            <article class="promo-card glass">
+              <div class="promo-icon icon-gold" aria-hidden="true">⚡</div>
+              <h3>Cobro Anticipado</h3>
+              <p>
+                Si tu equipo toma ventaja de 2 goles en cualquier momento del partido, pagamos tu apuesta ganadora al instante sin esperar el pitazo final.
+              </p>
+              <span class="promo-tag">Válido en mercados 1X2 pre-partido</span>
+            </article>
+
+            <article class="promo-card glass">
+              <div class="promo-icon icon-electric" aria-hidden="true">🚀</div>
+              <h3>Cuotas Aumentadas (SuperOdds)</h3>
+              <p>
+                Multiplicadores especiales por encima del mercado en los clásicos y finales más esperadas. Máxima rentabilidad en cada jugada.
+              </p>
+              <span class="promo-tag">Actualización diaria en vivo</span>
+            </article>
+          </div>
+
+          <!-- FEED EN VIVO DE GANADORES -->
+          <div class="live-winners-bar glass" aria-label="Ganadores recientes en tiempo real">
+            <div class="winners-header">
+              <span class="live-dot" aria-hidden="true"></span>
+              <strong>PAGOS RECIENTES EN VIVO</strong>
+              <span class="winners-subtitle">Actividad verificada de la comunidad GolazoBet</span>
+            </div>
+
+            <div class="winners-track-wrap">
+              <div id="winners-feed-card" class="winner-spotlight">
+                <span id="winner-avatar" class="winner-avatar">JP</span>
+                <div class="winner-info">
+                  <p id="winner-text" class="winner-text">
+                    <strong>Juan P.</strong> acaba de ganar <span class="accent-neon">$450 USD</span> en la Champions League
+                  </p>
+                  <span id="winner-meta" class="winner-meta">Hace unos segundos • Cuota 3.00</span>
+                </div>
+                <span class="winner-pill">COBRADO</span>
+              </div>
+
+              <div id="winners-chips" class="winners-chips" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <a href="#top" class="brand-logo">
+              <span class="brand-icon" aria-hidden="true">⚽</span>
+              <span class="brand-wordmark">GOLAZO<span class="accent-neon">BET</span></span>
+            </a>
+            <p class="footer-copy">
+              Plataforma de entretenimiento y apuestas deportivas enfocada en fútbol internacional, cuotas competitivas y seguridad de datos.
+            </p>
+            <div class="responsible-badge">
+              <span class="age-badge">+18</span>
+              <span>Juega con responsabilidad. El entretenimiento deportivo debe mantenerse bajo control.</span>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Juego Responsable y Ayuda</h4>
+            <ul>
+              <li><a href="#juego-responsable" onclick="event.preventDefault(); openInfoModal('responsible');">Límites de Depósito y Autoexclusión</a></li>
+              <li><a href="#ayuda-ludopatia" onclick="event.preventDefault(); openInfoModal('help');">Líneas de Ayuda contra la Ludopatía</a></li>
+              <li><a href="#terminos" onclick="event.preventDefault(); openInfoModal('terms');">Términos y Condiciones del Bono 100%</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Métodos de Pago</h4>
+            <div class="payment-methods">
+              <span class="payment-pill">💳 Tarjetas Visa / Mastercard</span>
+              <span class="payment-pill">₿ Criptomonedas (BTC / USDT)</span>
+              <span class="payment-pill">🏦 Transferencias Bancarias</span>
+              <span class="payment-pill">📲 Billeteras Digitales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-legal">
+          <p>
+            <strong>Aviso Legal y Licencias:</strong> GolazoBet opera bajo estándares internacionales de cumplimiento, prevención de fraude y protección al usuario. Verifica siempre la regulación de apuestas en tu jurisdicción antes de participar. Prohibido el acceso a menores de 18 años.
+          </p>
+          <p class="copyright">© <span id="current-year">2026</span> GolazoBet. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL DE REGISTRO / INICIO DE SESIÓN / CONFIRMACIÓN -->
+  <div id="auth-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card glass">
+      <button id="modal-close-btn" type="button" class="modal-close" aria-label="Cerrar ventana">✕</button>
+      <span id="modal-tag" class="section-eyebrow">BONO DE BIENVENIDA 100%</span>
+      <h3 id="modal-title" class="modal-title">Crea tu cuenta en GolazoBet</h3>
+      <p id="modal-desc" class="modal-desc">
+        Duplica tu primer depósito hasta $200 USD y comienza a apostar en los mejores partidos de fútbol.
+      </p>
+
+      <form id="auth-form" class="modal-form">
+        <div class="form-group">
+          <label for="auth-email">Correo electrónico</label>
+          <input id="auth-email" type="email" required placeholder=" hincha@golazobet.com" />
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Contraseña</label>
+          <input id="auth-password" type="password" required minlength="6" placeholder="••••••••" />
+        </div>
+        <div id="modal-extra-summary" class="modal-summary hidden"></div>
+        <button id="modal-submit-btn" type="submit" class="btn btn-neon btn-block btn-lg">
+          Reclamar Bono hasta $200 USD
+        </button>
+      </form>
+
+      <div id="modal-feedback" class="modal-feedback hidden"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
